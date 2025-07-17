@@ -49,18 +49,15 @@ public class Bankdetails {
                         int n = insertStmt.executeUpdate();
                         if (n != 0) {
                             System.out.println("Bank details uploaded successfully!");
+                            System.out.println("---------------------------------------------------------------------------------------------------------------");
                         }
 
-                        insertStmt.close();
+                      //  insertStmt.close();
 
                     } else {
                         System.out.println("Required employee ID not present in our company!");
                     }
                 }
-
-                rs.close();
-                p.close();
-
             } else {
                 System.out.println("PLEASE ENTER EMPLOYEE ID");
             }

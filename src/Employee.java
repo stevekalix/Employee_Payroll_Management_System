@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import Controller.Bankdetails;
 import Controller.Emp;
+import Controller.Payroll;
 import Controller.Rolldepartmentinsert;
  public class Employee {
 	    	public Connection c;
@@ -12,14 +13,13 @@ import Controller.Rolldepartmentinsert;
 			DataInputStream dis = new DataInputStream(System.in);
 			public Employee()
 	    	{
-	    		try{
-	    		Class.forName("oracle.jdbc.driver.OracleDriver");
-	    		c = DriverManager.getConnection("jdbc:oracle:thin:@DESKTOP-GLS1CGU:1521:XE","mani","mani");
-	    		System.out.println(c.toString()+"Connected Sucessfully!!!");
-	    		}
-	    		catch(ClassNotFoundException e){
-	    			e.printStackTrace();
-	    		}
+	    		 try{
+                         Class.forName("com.mysql.cj.jdbc.Driver");
+                         c = DriverManager.getConnection("jdbc:mysql://localhost:3306/employee__database", "root", "mani97888#");
+                         System.out.println("Connected !!  "+c.toString());
+                       } catch (SQLException e) {
+        e.printStackTrace();
+    }  
 	    		catch (Exception e) {
 	    			e.printStackTrace();
 	    			}
@@ -31,13 +31,15 @@ import Controller.Rolldepartmentinsert;
 				Employee employee=new Employee();
 	            Emp emp=new Emp(employee.getConnection());   //class one
 			    Rolldepartmentinsert rol=new Rolldepartmentinsert(employee.getConnection()); // class two
-				Bankdetails bankdetails=new Bankdetails(employee.getConnection());
-
+				Bankdetails bankdetails=new Bankdetails(employee.getConnection());  //class three
+				Payroll payroll=new Payroll(employee.getConnection()); // class four
 			 int choice;
              do{
 			 System.out.println("New Employee!!");
 			 System.out.println("1.New Employee fill deatils");
 			 System.out.println("2.Employee band details");
+			 System.out.println("3.Show employee datails");
+			 System.out.println("4.Employee payment datails");
 			 System.out.println("0.Exit");
              choice=sc.nextInt();
              switch (choice) {
@@ -50,19 +52,22 @@ import Controller.Rolldepartmentinsert;
 						System.out.println("2.Show Employe deatils");
 						System.out.println("3.Employee bank details");
 						System.out.println("0.Exit");
-						System.out.println("Enter your choice!!");
+						System.out.println("Enter your choice!!:");
+						sc.nextLine();
 						choice1=sc.nextInt();
 						switch (choice1) {
 							case 1:
 							 emp.InsertEmployee();
 							 break;
 							 case 2:
-							 System.out.println("Fastly update this from!!");
+							 System.out.println("Employee  details");
+							 emp.show();
 							 break;
 							 case 3:
 							 System.out.println("EMPLOYEE BANK DETAILS!!");
 							 bankdetails.insertBankEmployee();
 							 break;
+							
 							default:
 							break;
 						}
@@ -70,10 +75,39 @@ import Controller.Rolldepartmentinsert;
 					  break;
 				}
 				case 2:{
-				             System.out.println("EMPLOYEE BANK DETAILS!!");
-							 bankdetails.insertBankEmployee();
-							 break;
+				     System.out.println("EMPLOYEE BANK DETAILS!!");
+					 bankdetails.insertBankEmployee();
+					 break;
 				}
+				case 3:{
+					System.out.println("All Employee details");
+					System.out.println("_____________________");
+					emp.show();
+				}
+				 case 4:{
+							 int cho = 0;
+							 do{
+								 System.out.println("Employee payment datails");
+						      	 System.out.println("1.Fill payment details!!");
+						    	 System.out.println("2.Show payment details");
+							     System.out.println("0.Exit");
+								 
+								 System.out.println("Enter your choice:");
+								 cho=sc.nextInt();
+
+								 switch (cho) {
+									case 1:
+									payroll.employeepayrollinsert();
+									break;
+									case 2:
+									payroll.showpayRoll();
+						            break;
+									default:
+									break;
+								 }
+							 }while(cho!=0);
+							 break;
+							}
 				default:
 					break;
 			 } 
