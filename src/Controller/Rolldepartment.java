@@ -4,12 +4,12 @@ import java.io.DataInputStream;
 import java.io.IOException;
 import java.sql.*;
 
-public class Rolldepartmentinsert {
+public class Rolldepartment {
     Connection c;
     PreparedStatement p;
     ResultSet rset = null;
 
-    public Rolldepartmentinsert(Connection c) {
+    public Rolldepartment(Connection c) {
         this.c = c;
     }
 

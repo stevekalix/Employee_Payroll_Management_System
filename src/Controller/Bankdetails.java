@@ -11,16 +11,13 @@ public class Bankdetails {
     Connection c;
     DataInputStream dis = new DataInputStream(System.in);
     Scanner sc=new Scanner(System.in);
-
     public Bankdetails(Connection c) {
         this.c = c;
     }
-
     public void insertBankEmployee() {
         try {
             System.out.println("Enter the employee id:");
             int employeeid = sc.nextInt();
-
             if (employeeid != 0) {
                 String checkQuery = "SELECT COUNT(*) FROM employee WHERE emp_id = ?";
                 PreparedStatement p= c.prepareStatement(checkQuery);
@@ -29,31 +26,23 @@ public class Bankdetails {
                 if (rs.next()) {
                     int count = rs.getInt(1);
                     if (count > 0) {
-                        // Step 2: Proceed to insert bank details
                         System.out.println("Bank name      : ");
                         String bankName = dis.readLine();
-
                         System.out.println("Account number : ");
                         String accNo = dis.readLine();
-
                         System.out.println("IFSC code      : ");
                         String ifsc = dis.readLine();
-
                         String insertQuery = "INSERT INTO Bankdetails(emp_id, Bank_name, acc_no, IFSC_code) VALUES (?, ?, ?, ?)";
                         PreparedStatement insertStmt = c.prepareStatement(insertQuery);
                         insertStmt.setInt(1, employeeid);
                         insertStmt.setString(2, bankName);
                         insertStmt.setString(3, accNo);
                         insertStmt.setString(4, ifsc);
-
                         int n = insertStmt.executeUpdate();
                         if (n != 0) {
                             System.out.println("Bank details uploaded successfully!");
                             System.out.println("---------------------------------------------------------------------------------------------------------------");
                         }
-
-                      //  insertStmt.close();
-
                     } else {
                         System.out.println("Required employee ID not present in our company!");
                     }

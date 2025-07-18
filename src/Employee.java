@@ -5,7 +5,7 @@ import java.util.Scanner;
 import Controller.Bankdetails;
 import Controller.Emp;
 import Controller.Payroll;
-import Controller.Rolldepartmentinsert;
+import Controller.Rolldepartment;
  public class Employee {
 	    	public Connection c;
 	    	PreparedStatement p;
@@ -18,8 +18,8 @@ import Controller.Rolldepartmentinsert;
                          c = DriverManager.getConnection("jdbc:mysql://localhost:3306/employee__database", "root", "mani97888#");
                          System.out.println("Connected !!  "+c.toString());
                        } catch (SQLException e) {
-        e.printStackTrace();
-    }  
+                                      e.printStackTrace(); 
+	}  
 	    		catch (Exception e) {
 	    			e.printStackTrace();
 	    			}
@@ -30,16 +30,17 @@ import Controller.Rolldepartmentinsert;
 				public static void main(String[] args) {
 				Employee employee=new Employee();
 	            Emp emp=new Emp(employee.getConnection());   //class one
-			    Rolldepartmentinsert rol=new Rolldepartmentinsert(employee.getConnection()); // class two
+			    Rolldepartment rol=new Rolldepartment(employee.getConnection()); // class two
 				Bankdetails bankdetails=new Bankdetails(employee.getConnection());  //class three
 				Payroll payroll=new Payroll(employee.getConnection()); // class four
 			 int choice;
              do{
 			 System.out.println("New Employee!!");
 			 System.out.println("1.New Employee fill deatils");
-			 System.out.println("2.Employee band details");
+			 System.out.println("2.Employee bank details");
 			 System.out.println("3.Show employee datails");
-			 System.out.println("4.Employee payment datails");
+			 System.out.println("4.Show particular Employee");
+			 System.out.println("5.Employee payment datails");
 			 System.out.println("0.Exit");
              choice=sc.nextInt();
              switch (choice) {
@@ -84,7 +85,11 @@ import Controller.Rolldepartmentinsert;
 					System.out.println("_____________________");
 					emp.show();
 				}
-				 case 4:{
+				case 4:{
+					System.out.println("Employee Details!!");
+					emp.showEmployeeDetails();
+				}
+				 case 5:{
 							 int cho = 0;
 							 do{
 								 System.out.println("Employee payment datails");
@@ -110,8 +115,7 @@ import Controller.Rolldepartmentinsert;
 							}
 				default:
 					break;
-			 } 
-			 
+			 } 	 
 			 }while (choice!=0); 
 	    }
 	}     

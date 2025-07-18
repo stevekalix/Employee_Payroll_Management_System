@@ -48,7 +48,6 @@ public class Emp {
 	            e.printStackTrace();
 	        }
     }
-
 	public void show(){
 		try{
 			String string="Select emp_id,emp_name,email_id from employee";
@@ -64,7 +63,6 @@ public class Emp {
 				System.out.println("  Name of em   :"+emp_name);
 				System.out.println("  Email id     :"+email);
 				System.out.println("______________________");
-			
 			}
 			rSet.close();
 			p.close();
@@ -73,5 +71,61 @@ public class Emp {
 			e.printStackTrace();
 		}
 	}
-    
+	public void showEmployeeDetails() {
+		try {
+			System.out.print("Enter the employee id : ");
+			int empid = sc.nextInt();
+			sc.nextLine();
+			if (empid != 0) {
+				String query = "SELECT emp_id, emp_name, dob, mobile_no,gender, email_id, address, role_id, department_id FROM employee WHERE emp_id = ?";
+				PreparedStatement preparedStatement = c.prepareStatement(query);
+				preparedStatement.setInt(1, empid);
+				ResultSet rSet = preparedStatement.executeQuery();
+				if (rSet.next()) {
+					int empId = rSet.getInt("emp_id");
+					String empName = rSet.getString("emp_name");
+					java.sql.Date dob = rSet.getDate("dob");
+					String mobileNo = rSet.getString("mobile_no");
+					String gender=rSet.getString("gender");
+					String emailId = rSet.getString("email_id");
+					String address = rSet.getString("address");
+					int roleId = rSet.getInt("role_id");
+					int departmentId = rSet.getInt("department_id");
+					System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------");
+					System.out.println("Employee ID       : " + empId);
+					System.out.println("Employee Name     : " + empName);
+					System.out.println("Date of Birth     : " + dob);
+					System.out.println("Mobile Number     : " + mobileNo);
+					System.out.println("DOB               : " + dob);
+					System.out.println("address		  : " + address);
+					System.out.println("role_id           :"+roleId);
+					System.out.println("Department_id     : "+departmentId);
+				}
+
+				String string="select department_name from department";
+				preparedStatement=c.prepareStatement(string);
+				ResultSet rset=preparedStatement.executeQuery();
+				if(rset.next()){
+					String dp_name=rset.getString("department_name");
+					System.out.println("Department name   :"+dp_name);
+				}
+
+
+				String string2="select role_name from roles";
+				preparedStatement =c.prepareStatement(string2);
+				ResultSet rSet2=preparedStatement.executeQuery();
+				if(rSet2.next()){
+					String name=rSet2.getString("role_name");
+
+					System.out.println("Role Name         : "+name);
+				}
+	       }
+		   else{
+			System.out.println("Please enter a valid employee id.");
+		   }
+		}
+	catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
 }
