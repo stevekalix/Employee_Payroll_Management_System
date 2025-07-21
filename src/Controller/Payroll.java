@@ -20,7 +20,7 @@ public class Payroll {
 public void employeepayrollinsert() {
     
     try {
-        System.out.println("Enter the employee id     :");
+        System.out.print("Employee id     :");
         int employeeid = sc.nextInt();
 
         if (employeeid != 0) {
@@ -31,11 +31,11 @@ public void employeepayrollinsert() {
             if (rSet.next()) {
                 int count = rSet.getInt(1);
                 if (count > 0) {
-                    System.out.println("Basic Salary     :");
+                    System.out.print("Basic Salary     :");
                     long basic_salary = sc.nextLong();
-                    System.out.println("Bonus Amount     :");
+                    System.out.print("Bonus Amount     :");
                     long bonus = sc.nextLong();
-                    System.out.println("Tax, Insurance   :");
+                    System.out.print("Tax, Insurance   :");
                     long Tax = sc.nextLong();
                     long netpay = basic_salary + bonus - Tax;
                     String payId = "PAY" + new SimpleDateFormat("yyyyMMddHHmmss").format(new java.util.Date());
@@ -52,9 +52,10 @@ public void employeepayrollinsert() {
                     int n = p.executeUpdate();
                     if (n != 0) {
                         System.out.println("Payment details successfully filed.");
-                        System.out.println("Pay id-------------Current date time--------");
-                        System.out.print("Pay id        :"+payId);
-                        System.out.println("    Current date :"+payTimestamp);
+                        sc.nextLine();
+                        System.out.println("         Pay id--------------------Current date time--------");
+                        System.out.print("         "+payId);
+                        System.out.println("          "+payTimestamp);
                         System.out.println("---------------------------------------------------------------------------------------------------------------------");
                     } else {
                         System.out.println("Please enter the data correctly.");
@@ -94,9 +95,9 @@ public void showpayRoll() {
                 PreparedStatement p2=connection.prepareStatement(string);
                 ResultSet rSet3=p2.executeQuery();
 
-                System.out.println("---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
-                System.out.println("Emp_ID  | Pay_ID           | Salary | Bonus | Deduction | Date & Time      | Net Pay");
-                System.out.println("---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+                System.out.println("--------------------------------------------------------------------------------------------------------------------------------------------------------");
+                System.out.println("Emp_ID  | Pay_ID            | Salary | Bonus | Deduction | Date & Time           | Net Pay");
+                System.out.println("--------------------------------------------------------------------------------------------------------------------------------------------------------");
                 while (rSet2.next()) {
                     int emp_id = rSet2.getInt("emp_id");
                     String pay = rSet2.getString("pay_id");
@@ -109,7 +110,7 @@ public void showpayRoll() {
 
                     System.out.printf("%7d | %-8s | %6d | %5d | %9d | %s | %7d%n",
                             emp_id, pay, salary, bonus, deduction, created_at.toString(), net_pay);
-                            System.out.println("---------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+                            System.out.println("--------------------------------------------------------------------------------------------------------------------------------------------------------");
                 }
 
             } else {

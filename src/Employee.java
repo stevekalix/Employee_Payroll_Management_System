@@ -84,6 +84,7 @@ import Controller.Rolldepartment;
 					System.out.println("All Employee details");
 					System.out.println("_____________________");
 					emp.show();
+					break;
 				}
 				case 4:{
 					System.out.println("Employee Details!!");

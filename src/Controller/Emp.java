@@ -8,7 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.Scanner;
 
 public class Emp {
-    Connection c;
+	Connection c;
     PreparedStatement p;
      DataInputStream dis=new DataInputStream(System.in);
 	 Scanner sc=new Scanner(System.in);
@@ -27,12 +27,23 @@ public class Emp {
 	            java.util.Date dob = sdf.parse(dis.readLine());
 	            p.setDate(2, new java.sql.Date(dob.getTime()));
                 System.out.print("Mobile number              :");
-                p.setString(3,dis.readLine());
+				String mobilenumber=dis.readLine();
+				if(mobilenumber.length()==10){
+				p.setString(3, mobilenumber); 
+			    }else{
+					System.out.println("VERIFY YOUR MOBILE NUMBER");
+				}
                 System.out.print("Gender                     :");
                 p.setString(4,dis.readLine());
-                System.out.print("Email id                   :");
-                p.setString(5,dis.readLine());
-                System.out.print("Address                    :");
+               System.out.print("Email id : ");
+               String emaString = dis.readLine();
+
+               if (emaString.matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$")) {
+               p.setString(5, emaString);
+               } else {
+               System.out.println("CHECK EMAIL ID!!");
+                }
+				System.out.print("Address                    :");
                 p.setString(6,dis.readLine());
 	            System.out.print("Role id(previous id)       : ");
 	            p.setInt(7,Integer.parseInt(dis.readLine()));
@@ -65,8 +76,8 @@ public class Emp {
 				System.out.println("______________________");
 			}
 			rSet.close();
-			p.close();
-			c.close();
+		//	p.close();
+		//	c.close();
 		}catch(Exception e){
 			e.printStackTrace();
 		}
@@ -98,7 +109,7 @@ public class Emp {
 					System.out.println("Mobile Number     : " + mobileNo);
 					System.out.println("DOB               : " + dob);
 					System.out.println("address		  : " + address);
-					System.out.println("role_id           :"+roleId);
+					System.out.println("role_id           : "+roleId);
 					System.out.println("Department_id     : "+departmentId);
 				}
 
@@ -107,7 +118,7 @@ public class Emp {
 				ResultSet rset=preparedStatement.executeQuery();
 				if(rset.next()){
 					String dp_name=rset.getString("department_name");
-					System.out.println("Department name   :"+dp_name);
+					System.out.println("Department name   : "+dp_name);
 				}
 
 
