@@ -28,8 +28,18 @@ public class Bankdetails {
                     if (count > 0) {
                         System.out.println("Bank name      : ");
                         String bankName = dis.readLine();
+                      
                         System.out.println("Account number : ");
-                        String accNo = dis.readLine();
+                        String accNo = "";
+                        long bnumber = sc.nextLong();
+                        sc.nextLine();
+                         if(bnumber==11) {
+                               accNo =Long.toString(bnumber);
+                        }
+                        else{
+                            System.out.println("Please enter a valid 11-digit account number.");
+                            return;
+                        }
                         System.out.println("IFSC code      : ");
                         String ifsc = dis.readLine();
                         String insertQuery = "INSERT INTO Bankdetails(emp_id, Bank_name, acc_no, IFSC_code) VALUES (?, ?, ?, ?)";

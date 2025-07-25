@@ -78,6 +78,7 @@ public void showpayRoll() {
         sc.nextLine(); 
         System.out.print("Payment ID             :");
         String pay_id = sc.nextLine();
+
         if (empid != 0 && !pay_id.isEmpty()) {
             String cheString = "SELECT COUNT(*) FROM paymentinfo WHERE emp_id = ? AND pay_id = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(cheString);
@@ -95,6 +96,7 @@ public void showpayRoll() {
                 PreparedStatement p2=connection.prepareStatement(string);
                 ResultSet rSet3=p2.executeQuery();
 
+                
                 System.out.println("--------------------------------------------------------------------------------------------------------------------------------------------------------");
                 System.out.println("Emp_ID  | Pay_ID            | Salary | Bonus | Deduction | Date & Time           | Net Pay");
                 System.out.println("--------------------------------------------------------------------------------------------------------------------------------------------------------");

@@ -61,7 +61,7 @@ public class Emp {
     }
 	public void show(){
 		try{
-			String string="Select emp_id,emp_name,email_id from employee";
+			String string="Select emp_id,emp_name,email_id,mobile_no,Gender from employee";
 			p=c.prepareStatement(string);
 			ResultSet rSet=p.executeQuery();
 
@@ -69,15 +69,19 @@ public class Emp {
 				int emp_id=rSet.getInt("emp_id");
 				String emp_name=rSet.getString("emp_name");
 				String email=rSet.getString("email_id");
+				String mobile_no=rSet.getString("mobile_no");
+				String gender=rSet.getString("Gender");
 
-				System.out.println("  Employee id  :"+emp_id);
-				System.out.println("  Name of em   :"+emp_name);
-				System.out.println("  Email id     :"+email);
+				System.out.println("  Employee id      :"+emp_id);
+				System.out.println("  Name of employee :"+emp_name);
+				System.out.println("  Email id         :"+email);
+				System.out.println("  Contact Number   :"+mobile_no);
+				System.out.println("  Gender	   :"+gender);
+
 				System.out.println("______________________");
 			}
 			rSet.close();
-		//	p.close();
-		//	c.close();
+		
 		}catch(Exception e){
 			e.printStackTrace();
 		}

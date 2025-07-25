@@ -31,7 +31,7 @@ public class Rolldepartment {
             }
             String roleSQL = "INSERT INTO roles (role_name) VALUES (?)";
             p = c.prepareStatement(roleSQL, new String[] { "ROLE_ID" });
-            System.out.print("Role of the New Employee: ");
+            System.out.print("Role of the New Employee     : ");
             String role_name = dis.readLine();
             p.setString(1, role_name);
             p.executeUpdate();

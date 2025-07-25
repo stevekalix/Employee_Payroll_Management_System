@@ -35,24 +35,27 @@ import Controller.Rolldepartment;
 				Payroll payroll=new Payroll(employee.getConnection()); // class four
 			 int choice;
              do{
-			 System.out.println("New Employee!!");
-			 System.out.println("1.New Employee fill deatils");
-			 System.out.println("2.Employee bank details");
-			 System.out.println("3.Show employee datails");
-			 System.out.println("4.Show particular Employee");
-			 System.out.println("5.Employee payment datails");
-			 System.out.println("0.Exit");
+			System.out.println("New Employee!!");
+            System.out.println("1. NEW EMPLOYEE FILL DETAILS");
+            System.out.println("2. EMPLOYEE BANK DETAILS");
+            System.out.println("3. SHOW EMPLOYEE DETAILS");
+            System.out.println("4. SHOW PARTICULAR EMPLOYEE");
+            System.out.println("5. EMPLOYEE PAYMENT DETAILS");
+            System.out.println("0. EXIT");
+			System.out.println(" ");
+            System.out.println("Enter your choice:");
              choice=sc.nextInt();
              switch (choice) {
 				case 1:{
 					  rol.insertdep();
 					  int choice1;
 					  do{
-						System.out.println("EMPLOYEE DETAILS");
-						System.out.println("1.Insert Employee details");
-						System.out.println("2.Show Employe deatils");
-						System.out.println("3.Employee bank details");
-						System.out.println("0.Exit");
+					System.out.println("EMPLOYEE DETAILS");
+                    System.out.println("1. INSERT EMPLOYEE DETAILS");
+                    System.out.println("2. SHOW EMPLOYEE DETAILS");
+                    System.out.println("3. EMPLOYEE BANK DETAILS");
+                    System.out.println("0. EXIT");
+					System.out.println(" ");
 						System.out.println("Enter your choice!!:");
 						sc.nextLine();
 						choice1=sc.nextInt();
@@ -61,14 +64,13 @@ import Controller.Rolldepartment;
 							 emp.InsertEmployee();
 							 break;
 							 case 2:
-							 System.out.println("Employee  details");
+							 System.out.println("ALL EMPLOYEE DETAILS!!");
 							 emp.show();
 							 break;
 							 case 3:
 							 System.out.println("EMPLOYEE BANK DETAILS!!");
 							 bankdetails.insertBankEmployee();
 							 break;
-							
 							default:
 							break;
 						}
@@ -81,23 +83,24 @@ import Controller.Rolldepartment;
 					 break;
 				}
 				case 3:{
-					System.out.println("All Employee details");
+					System.out.println("ALL EMPLOYEE DETAILS!!");
 					System.out.println("_____________________");
 					emp.show();
 					break;
 				}
 				case 4:{
-					System.out.println("Employee Details!!");
+					System.out.println("EMPLOYEE DETAILS!!");
 					emp.showEmployeeDetails();
 				}
 				 case 5:{
 							 int cho = 0;
 							 do{
 								 System.out.println("Employee payment datails");
-						      	 System.out.println("1.Fill payment details!!");
-						    	 System.out.println("2.Show payment details");
-							     System.out.println("0.Exit");
-								 
+						      	 System.out.println("1.INSERT PAYMENT DETAILS");
+						    	 System.out.println("2.SHOW PAYMENT DETAILS");
+							     System.out.println("0.EXIT");
+
+								 System.out.println("");
 								 System.out.println("Enter your choice:");
 								 cho=sc.nextInt();
 
