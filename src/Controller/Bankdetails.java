@@ -33,7 +33,9 @@ public class Bankdetails {
                         String accNo = "";
                         long bnumber = sc.nextLong();
                         sc.nextLine();
-                         if(bnumber==11) {
+                        String lan=String.valueOf(bnumber);
+                        int len1=lan.length();
+                         if(len1==11) {
                                accNo =Long.toString(bnumber);
                         }
                         else{

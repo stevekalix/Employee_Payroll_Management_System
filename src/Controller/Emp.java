@@ -35,7 +35,7 @@ public class Emp {
 				}
                 System.out.print("Gender                     :");
                 p.setString(4,dis.readLine());
-               System.out.print("Email id : ");
+               System.out.print("Email id                    : ");
                String emaString = dis.readLine();
 
                if (emaString.matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$")) {
@@ -61,27 +61,29 @@ public class Emp {
     }
 	public void show(){
 		try{
-			String string="Select emp_id,emp_name,email_id,mobile_no,Gender from employee";
-			p=c.prepareStatement(string);
-			ResultSet rSet=p.executeQuery();
+			
+           String query = "SELECT emp_id, emp_name, dob, mobile_no,gender, email_id, address, role_id, department_id FROM employee";
+				PreparedStatement preparedStatement = c.prepareStatement(query);
+				ResultSet rSet = preparedStatement.executeQuery();
+				System.out.println("-----------------------------------------------------------------------------------------------------------------------------------------------------------");
+System.out.printf("%-13s | %-17s | %-13s | %-14s | %-25s | %-7s | %-14s | %-21s | %-6s%n", "Employee Id", "Employee Name", "Date of Birth", "Mobile number", "Address", "Role_id", "Department id", "Email ID", "Gender");
+System.out.println("-----------------------------------------------------------------------------------------------------------------------------------------------------------");
 
-			while (rSet.next()) {
-				int emp_id=rSet.getInt("emp_id");
-				String emp_name=rSet.getString("emp_name");
-				String email=rSet.getString("email_id");
-				String mobile_no=rSet.getString("mobile_no");
-				String gender=rSet.getString("Gender");
+				while(rSet.next()) {
+					int empId = rSet.getInt("emp_id");
+					String empName = rSet.getString("emp_name");
+					java.sql.Date dob = rSet.getDate("dob");
+					String mobileNo = rSet.getString("mobile_no");
+					String gender=rSet.getString("gender");
+					String emailId = rSet.getString("email_id");
+					String address = rSet.getString("address");
+					int roleId = rSet.getInt("role_id");
+					int departmentId = rSet.getInt("department_id");
 
-				System.out.println("  Employee id      :"+emp_id);
-				System.out.println("  Name of employee :"+emp_name);
-				System.out.println("  Email id         :"+email);
-				System.out.println("  Contact Number   :"+mobile_no);
-				System.out.println("  Gender	   :"+gender);
+					System.out.printf("%-13s | %-17s | %-13s | %-14s | %-25s | %-7s | %-14s | %-21s | %-6s%n",empId, empName, dob, mobileNo, address, roleId, departmentId, emailId, gender);
+				
 
-				System.out.println("______________________");
-			}
-			rSet.close();
-		
+				}		
 		}catch(Exception e){
 			e.printStackTrace();
 		}
@@ -107,14 +109,15 @@ public class Emp {
 					int roleId = rSet.getInt("role_id");
 					int departmentId = rSet.getInt("department_id");
 					System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------");
-					System.out.println("Employee ID       : " + empId);
-					System.out.println("Employee Name     : " + empName);
-					System.out.println("Date of Birth     : " + dob);
-					System.out.println("Mobile Number     : " + mobileNo);
-					System.out.println("DOB               : " + dob);
-					System.out.println("address		  : " + address);
-					System.out.println("role_id           : "+roleId);
-					System.out.println("Department_id     : "+departmentId);
+				    System.out.println("Employee Id   | Employee Name     | Date of Brith | Mobile number | Address                  | Role_id | Department id");
+				    System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------");
+					System.out.print("   " + empId);
+					System.out.print("          | " + empName);
+					System.out.print("              | " + dob);
+					System.out.print("    | " + mobileNo);
+					System.out.print("    | " + address);
+					System.out.print("        | "+roleId);
+					System.out.println("       | "+departmentId);
 				}
 
 				String string="select department_name from department";
@@ -122,7 +125,8 @@ public class Emp {
 				ResultSet rset=preparedStatement.executeQuery();
 				if(rset.next()){
 					String dp_name=rset.getString("department_name");
-					System.out.println("Department name   : "+dp_name);
+					System.out.println(" ");
+					System.out.print("Department name   : "+dp_name);
 				}
 
 
@@ -131,7 +135,7 @@ public class Emp {
 				ResultSet rSet2=preparedStatement.executeQuery();
 				if(rSet2.next()){
 					String name=rSet2.getString("role_name");
-
+                    System.out.println(" ");
 					System.out.println("Role Name         : "+name);
 				}
 	       }

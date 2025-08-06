@@ -29,9 +29,11 @@ public class Rolldepartment {
             if (rset.next()) {
                 department_id = rset.getInt(1);
             }
+
+
             String roleSQL = "INSERT INTO roles (role_name) VALUES (?)";
             p = c.prepareStatement(roleSQL, new String[] { "ROLE_ID" });
-            System.out.print("Role of the New Employee     : ");
+            System.out.print("Role of the New Employee    : ");
             String role_name = dis.readLine();
             p.setString(1, role_name);
             p.executeUpdate();
@@ -40,13 +42,14 @@ public class Rolldepartment {
             if (rset.next()) {
                 roleId = rset.getInt(1);
             }
-            System.out.println("✔ Inserted Successfully!");
+            System.out.println(" Inserted Successfully!");
             System.out.println("Role ID          : " + roleId);
             System.out.println("Role Name        : " + role_name);
             System.out.println("Department ID    : " + department_id);
             System.out.println("Department Name  : " + deptName);
             System.out.println("--------------------------------------------------------------------------------------------------------------------------------------");
-        } catch (SQLException | IOException e) {
+        } 
+        catch (SQLException | IOException e) {
             e.printStackTrace();
           
         }

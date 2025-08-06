@@ -40,7 +40,7 @@ public void employeepayrollinsert() {
                     long netpay = basic_salary + bonus - Tax;
                     String payId = "PAY" + new SimpleDateFormat("yyyyMMddHHmmss").format(new java.util.Date());
                     Timestamp payTimestamp=new Timestamp(System.currentTimeMillis());
-                    String sql = "INSERT INTO paymentinfo (pay_id, emp_id, basic_salary, bonus,Net_pay, detuction, created_At)VALUES (?, ?, ?, ?, ?, ?, ?)";
+                    String sql = "INSERT INTO paymentinfo (pay_id, emp_id, basic_salary, bonus,Net_pay, TAX , created_At)VALUES (?,?, ?, ?, ?, ?, ?)";
                     p = connection.prepareStatement(sql);
                     p.setString(1, payId);
                     p.setInt(2, employeeid);
@@ -86,7 +86,7 @@ public void showpayRoll() {
             preparedStatement.setString(2, pay_id);
             ResultSet rSet = preparedStatement.executeQuery();
             if (rSet.next() && rSet.getInt(1) > 0) {
-                String query = "SELECT emp_id, pay_id, basic_salary, bonus, detuction, created_at, net_pay FROM paymentinfo WHERE emp_id = ? AND pay_id = ?";
+                String query = "SELECT emp_id, pay_id, basic_salary, bonus, TAX, created_at, net_pay FROM paymentinfo WHERE emp_id = ? AND pay_id = ?";
                 PreparedStatement p1 = connection.prepareStatement(query);
                 p1.setInt(1, empid);
                 p1.setString(2, pay_id);
@@ -97,22 +97,22 @@ public void showpayRoll() {
                 ResultSet rSet3=p2.executeQuery();
 
                 
-                System.out.println("--------------------------------------------------------------------------------------------------------------------------------------------------------");
-                System.out.println("Emp_ID  | Pay_ID            | Salary | Bonus | Deduction | Date & Time           | Net Pay");
-                System.out.println("--------------------------------------------------------------------------------------------------------------------------------------------------------");
+                System.out.println("-----------------------------------------------------------------------------------------------");
+                System.out.println("Emp_ID  | Pay_ID            | Salary | Bonus | TAX       | Date & Time           | Net Pay");
+                System.out.println("-----------------------------------------------------------------------------------------------");
                 while (rSet2.next()) {
                     int emp_id = rSet2.getInt("emp_id");
                     String pay = rSet2.getString("pay_id");
                     long salary = rSet2.getLong("basic_salary");
                     long bonus = rSet2.getLong("bonus");
-                    long deduction = rSet2.getLong("detuction");
+                    long TAX = rSet2.getLong("TAX");
                     Timestamp created_at = rSet2.getTimestamp("created_at");
                     long net_pay = rSet2.getLong("net_pay");
 
 
                     System.out.printf("%7d | %-8s | %6d | %5d | %9d | %s | %7d%n",
-                            emp_id, pay, salary, bonus, deduction, created_at.toString(), net_pay);
-                            System.out.println("--------------------------------------------------------------------------------------------------------------------------------------------------------");
+                            emp_id, pay, salary, bonus, TAX, created_at.toString(), net_pay);
+                            System.out.println("-----------------------------------------------------------------------------------------------");
                 }
 
             } else {
